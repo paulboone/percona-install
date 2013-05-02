@@ -36,16 +36,16 @@ when "redhat","centos","fedora","suse", "amazon", "scientific"
 
 when "debian","ubuntu"
 
-  execute "key-install" do
-    action :nothing
-    command "gpg --keyserver  hkp://#{node['percona-install']['keyserver']} --recv-keys 1C4CBDCDCD2EFD2A | gpg -a --export CD2EFD2A | apt-key add - && apt-get update"
-  end
-
   template "/etc/apt/sources.list.d/percona_repo.list" do
     source "percona_repo.list.erb"
     owner "root"
     group "root"
     mode "0644"
-    notifies :run, "execute[key-install]", :immediately
   end
+  
+  execute "key-install" do
+    action :run
+    command "gpg --keyserver  hkp://#{node['percona-install']['keyserver']} --recv-keys 1C4CBDCDCD2EFD2A | gpg -a --export CD2EFD2A | apt-key add - && apt-get update"
+    not_if "apt-key list | grep CD2EFD2A"
+  end  
 end
