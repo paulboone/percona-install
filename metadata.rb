@@ -13,6 +13,11 @@ recipe           "xtrabackup", "Installs Percona xtrabackup"
 recipe           "monitoring", "Installs Percona monitoring plugins"
 recipe           "toolkit", "Installs Percona toolkit"
 
+attribute "percona-install/keyserver", 
+  :dislpay_name => "Percona Install - Keyserver",
+  :description => "The keyserver to use",
+  :type => "string"
+
 attribute "percona-install/plugins_url", 
   :dislpay_name => "Percona Install - Plugins URL",
   :description => "The base URL for the percona-monitoring-plugins",

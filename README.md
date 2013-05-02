@@ -20,6 +20,8 @@ none
 Attributes
 ==========
 
+* `node['percona-install']['keyserver']` - change the keyserver here, if necessary. 
+
 These attributes are used by the monitoring recipe:
 
 * `node['percona-install']['plugins_url']` - The base URL for the percona-monitoring-plugins
